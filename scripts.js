@@ -1,25 +1,25 @@
-﻿var drawButton	= document.getElementById('draw');
-var startButton	= document.getElementById('start');
-var duelButton	= document.getElementById('duel');
-var p	= document.getElementById('p');
-var d	= document.getElementById('d')
-var ps	= document.getElementById('psum');
-var ds	= document.getElementById('dsum');
-var result = document.getElementById('duelresult');
-var goldc = document.getElementById('gold');
+﻿let drawButton	= document.getElementById('draw');
+let startButton	= document.getElementById('start');
+let duelButton	= document.getElementById('duel');
+let p	= document.getElementById('p');
+let d	= document.getElementById('d')
+let ps	= document.getElementById('psum');
+let ds	= document.getElementById('dsum');
+let result = document.getElementById('duelresult');
+let goldc = document.getElementById('gold');
 
-var playerHand;
-var dealerHand;
-var dealerHandSecond;
-var i = 0;
+let playerHand;
+let dealerHand;
+let dealerHandSecond;
+let i = 0;
 
-var gold = 1000;
+let gold = 1000;
 
 drawButton.disabled = true;
 duelButton.disabled = true;
 
-var d_imgs = document.getElementById('d_imgs');
-var p_imgs = document.getElementById('p_imgs');
+let d_imgs = document.getElementById('d_imgs');
+let p_imgs = document.getElementById('p_imgs');
 
 /*
 ◆実装予定
@@ -41,16 +41,16 @@ startButton.onclick = function(){
 	while (p_imgs.firstChild) p_imgs.removeChild(p_imgs.firstChild);
 	
 	// プレイヤー1回目のドロー
-	card = DrawCard();
+	let card = DrawCard();
 	PutDrawCard("p", card, true);
 	SaveCard("p", card.n);
 	PutTotalHand("p");
 	AppendImg("p", card.pn, card.n);
 	
-	var img = document.createElement('img');
+	let img = document.createElement('img');
 	
 	//ディーラー1回目のドロー
-	var card = DrawCard();
+	card = DrawCard();
 	PutDrawCard("d", card, true);
 	SaveCard("d", card.n);
 	PutTotalHand("d");
@@ -64,7 +64,7 @@ startButton.onclick = function(){
 	AppendImg("p", card.pn, card.n);
 	
 	//ディーラー2回目のドロー(2枚目は表示しない)
-	var card = DrawCard();
+	card = DrawCard();
 	dealerHandSecond = card.pn;
 	SaveCard("d", card.n);
 
@@ -90,14 +90,14 @@ drawButton.onclick = function(){
 	i++;
 	drawButton.innerText = "カード" + i;
 */	
-	var card = DrawCard();
+	let card = DrawCard();
 	PutDrawCard("p", card);
 	AppendImg("p", card.pn, card.n);
 	if(card.n >= 10)
 		card.n = 10;
 	playerHand.push(card.n);
-	var sum = 0;
-	for(var j = 0; j < playerHand.length; j++){
+	let sum = 0;
+	for(let j = 0; j < playerHand.length; j++){
 		sum += playerHand[j];
 		console.log("sum : " + sum);
 		if(sum == 21){
@@ -121,9 +121,9 @@ duelButton.onclick = function(){
 	d.innerText += "\n" + numToPictureName(dealerHandSecond) + "の" + dealerHand[1]; // ディーラー2回目の手
 	AppendImg("d", dealerHandSecond, dealerHand[1]);
 	PutTotalHand("d");
-	var d_burst = false; // ディーラーのバースト具合
+	let d_burst = false; // ディーラーのバースト具合
 	while(TotalHand("d") < 17){
-		var card = DrawCard();
+		let card = DrawCard();
 		PutDrawCard("d", card);
 		SaveCard("d", card.n);
 		PutTotalHand("d");
@@ -133,14 +133,14 @@ duelButton.onclick = function(){
 			d_burst = true;
 		}
 	}
-	var p_existA = false;
-	for(var j = 0; j < playerHand.length; j++){
+	let p_existA = false;
+	for(let j = 0; j < playerHand.length; j++){
 		if(playerHand[j] == 1){
 			p_existA = true;
 		}
 	}
-	var d_existA = false;
-	for(var j = 0; j < dealerHand.length; j++){
+	let d_existA = false;
+	for(let j = 0; j < dealerHand.length; j++){
 		if(dealerHand[j] == 1){
 			d_existA = true;
 		}
@@ -195,13 +195,13 @@ function getRandomInt(max) {
 * 画像追加
 */
 function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラーか(p or d)
-	var o;
+	let o;
 	if(oStr == "d")
 		o = d_imgs;
 	else if(oStr == "p")
 		o = p_imgs;
 	
-	var div = document.createElement('div');
+	let div = document.createElement('div');
 	div.style.position = "relative";
 	div.style.overflow = "hidden";
 	div.style.width = "60px";
@@ -209,7 +209,7 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 	div.style.display = "inline-block";
 	o.appendChild(div);
 	
-	var img = document.createElement('img');
+	let img = document.createElement('img');
 	img.src = num + ".png";
 	img.style.position = "absolute";
 	img.style.top = "0";
@@ -224,7 +224,7 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 * 図柄名を受け取って、ピクセル数を返す
 */
 function GetPixel(pName){
-	var p = "0";
+	let p = "0";
 	if(pName == 0){
 		p = "0";
 	}
@@ -243,19 +243,19 @@ function GetPixel(pName){
 /**
 * 対象の手の合計を返す
 */
-function TotalHand(o){ // o:誰のカードか(ディーラーかプレイヤーか)
-	var o;
-	var oc;
-	if(o == "d"){
+function TotalHand(oStr){ // oStr:誰のカードか(ディーラーかプレイヤーか)
+	let o;
+	let oc;
+	if(oStr == "d"){
 		o = dealerHand;
 		oc = d;
 	}
-	else if(o == "p"){
+	else if(oStr == "p"){
 		o = playerHand;
 		oc = p;
 	}
-	var sum = 0;
-	for(var j = 0; j < o.length; j++){
+	let sum = 0;
+	for(let j = 0; j < o.length; j++){
 		sum += o[j];
 /*		console.log("sum : " + sum);
 		if(sum == 21){
@@ -272,14 +272,14 @@ function TotalHand(o){ // o:誰のカードか(ディーラーかプレイヤー
 * 引いたカードを表示
 */
 function PutDrawCard(oStr, card, first = false){ // oStr  "d":ディーラー "p":プレイヤー
-	var o;
+	let o;
 	if(oStr == "d"){
 		o = d;
 	}
 	else if(oStr == "p"){
 		o = p;
 	}
-	var n = "";
+	let n = "";
 	if(first == false){
 		n = "\n";
 	}
@@ -295,8 +295,8 @@ function PutDrawCard(oStr, card, first = false){ // oStr  "d":ディーラー "p
 * 手の合計の表示
 */
 function PutTotalHand(oStr){ // oStr  "d":ディーラー "p":プレイヤー
-	var o;
-	var oc;
+	let o;
+	let oc;
 	if(oStr == "d"){
 		o = dealerHand;
 		oc = ds;
@@ -305,8 +305,8 @@ function PutTotalHand(oStr){ // oStr  "d":ディーラー "p":プレイヤー
 		o = playerHand;
 		oc = ps;
 	}
-	var existA = false;
-	for(var j = 0; j < o.length; j++){
+	let existA = false;
+	for(let j = 0; j < o.length; j++){
 		if(o[j] == 1){
 			existA = true;
 		}
@@ -331,11 +331,11 @@ function PutTotalHand(oStr){ // oStr  "d":ディーラー "p":プレイヤー
 * カードを保存
 * 10以上のカードは10にする
 */
-function SaveCard(o, num){ // o:誰のカードか(ディーラーかプレイヤーか) num:カードの数字
-	var o;
-	if(o == "d")
+function SaveCard(oStr, num){ // oStr:誰のカードか(ディーラーかプレイヤーか) num:カードの数字
+	let o;
+	if(oStr == "d")
 		o = dealerHand;
-	else if(o == "p")
+	else if(oStr == "p")
 		o = playerHand;
 	if(num >= 10){
 		num = 10;
@@ -347,8 +347,8 @@ function SaveCard(o, num){ // o:誰のカードか(ディーラーかプレイ�
 * カードを引く
 */
 function DrawCard(){
-	var cardNum = 0;
-	var cardPicture = 0;
+	let cardNum = 0;
+	let cardPicture = 0;
 	while(cardNum == 0){
 		cardPicture = getRandomInt(4)
 		cardNum = getRandomInt(13) + 1;
@@ -371,7 +371,7 @@ function findCard(picture, num){
 	if(deck[picture][num] == 0)
 		return 0;
 	console.log(deck[picture][num]);
-	var r = deck[picture][num];
+	let r = deck[picture][num];
 	usedCard(picture, num);
 	return r;
 }
@@ -389,7 +389,7 @@ function usedCard(picture, num){
 * 絵柄の数値を名前に変換
 */
 function numToPictureName(pictureNum){
-	var pictureName = "";
+	let pictureName = "";
 	if(pictureNum == 0)
 		pictureName = "ハート";
 	else if(pictureNum == 1)
@@ -401,7 +401,7 @@ function numToPictureName(pictureNum){
 	return pictureName;
 }
 
-var deck = [
+let deck = [
 	[0,1,2,3,4,5,6,7,8,9,10,11,12,13],		// 0...ハート
 	[0,1,2,3,4,5,6,7,8,9,10,11,12,13],		// 1...スペード
 	[0,1,2,3,4,5,6,7,8,9,10,11,12,13],		// 2...ダイヤ
