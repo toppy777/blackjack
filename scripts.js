@@ -1,12 +1,12 @@
-﻿let drawButton	= document.getElementById('draw');
-let startButton	= document.getElementById('start');
-let duelButton	= document.getElementById('duel');
-let p	= document.getElementById('p');
-let d	= document.getElementById('d')
-let ps	= document.getElementById('psum');
-let ds	= document.getElementById('dsum');
-let result = document.getElementById('duelresult');
-let goldc = document.getElementById('gold');
+﻿const drawButton	= document.getElementById('draw');
+const startButton	= document.getElementById('start');
+const duelButton	= document.getElementById('duel');
+const p	= document.getElementById('p');
+const d	= document.getElementById('d')
+const ps	= document.getElementById('psum');
+const ds	= document.getElementById('dsum');
+const result = document.getElementById('duelresult');
+const goldc = document.getElementById('gold');
 
 let playerHand;
 let dealerHand;
@@ -18,8 +18,8 @@ let gold = 1000;
 drawButton.disabled = true;
 duelButton.disabled = true;
 
-let d_imgs = document.getElementById('d_imgs');
-let p_imgs = document.getElementById('p_imgs');
+const d_imgs = document.getElementById('d_imgs');
+const p_imgs = document.getElementById('p_imgs');
 
 /*
 ◆実装予定
@@ -47,7 +47,7 @@ startButton.onclick = function(){
 	PutTotalHand("p");
 	AppendImg("p", card.pn, card.n);
 	
-	let img = document.createElement('img');
+	const img = document.createElement('img');
 	
 	//ディーラー1回目のドロー
 	card = DrawCard();
@@ -201,7 +201,7 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 	else if(oStr == "p")
 		o = p_imgs;
 	
-	let div = document.createElement('div');
+	const div = document.createElement('div');
 	div.style.position = "relative";
 	div.style.overflow = "hidden";
 	div.style.width = "60px";
@@ -209,7 +209,7 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 	div.style.display = "inline-block";
 	o.appendChild(div);
 	
-	let img = document.createElement('img');
+	const img = document.createElement('img');
 	img.src = num + ".png";
 	img.style.position = "absolute";
 	img.style.top = "0";
