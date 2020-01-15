@@ -1,0 +1,52 @@
+﻿<html lang="ja">
+<head>
+<title>BlackJack</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div id="discription">
+	◆ブラックジャックのルール<br>
+	ブラックジャックは引いたカードの合計を21に近づけていくゲームです。<br>
+	21を超えるとバーストといって地球が滅びます。<br>
+	なのでプレイヤーの負けです。<br>
+	最初の2枚で21になると、ブラックジャックとなります。
+	
+</div>
+<div id="main">
+	<h1>BlackJack</h1>
+	<div>ディーラー<span id="dsum"></span></div>
+	<button id="start">ゲームスタート</button>
+	<div id="d_imgs"></div>
+
+	<div id="d"></div>
+
+	<br>
+
+	<div>プレイヤー<span id="psum"></span></div>
+	<button id="draw">ヒット</button><button id="duel">スタンド</button>
+	<div id="p_imgs"></div>
+	<div id="p"></div>
+
+	<br>
+
+
+	<div id="duelresult"></div>
+	<br><br>
+
+	<div id="gold"></div>
+</div>
+
+<script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
+<!--
+
+１．自分の2個の数字を表示
+２．相手の一つの数字を表示
+３．もう一枚引くか
+４．21を超えていたらバースト
+５．３，４をループ
+６．相手のもう一つの数字を表示
+
+-->
+
