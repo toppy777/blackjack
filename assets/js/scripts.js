@@ -118,11 +118,17 @@ drawButton.onclick = function(){
 };
 
 duelButton.onclick = function(){
+	let d_burst = false; // ディーラーのバースト具合
+	let d_blackjack = false;
 	d.innerText += "\n" + numToPictureName(dealerHandSecond) + "の" + dealerHand[1]; // ディーラー2回目の手
 	AppendImg("d", dealerHandSecond, dealerHand[1]);
 	PutTotalHand("d");
-	let d_burst = false; // ディーラーのバースト具合
-	while(TotalHand("d") < 17){
+	if((dealerHand[0] == 1 || dealerHand[1] == 1) && (dealerHand[0] + dealerHand[1]) == 11){
+		d.innerText += "\nブラックジャックです。";
+		d_blackjack = true;
+	}
+	
+	while(TotalHand("d") < 17 && d_blackjack == false){
 		let card = DrawCard();
 		PutDrawCard("d", card);
 		SaveCard("d", card.n);
@@ -201,7 +207,7 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 	else if(oStr == "p")
 		o = p_imgs;
 	
-	const div = document.createElement('div');
+	let div = document.createElement('div');
 	div.style.position = "relative";
 	div.style.overflow = "hidden";
 	div.style.width = "60px";
@@ -209,15 +215,36 @@ function AppendImg(oStr, pName, num){ // oStr: プレイヤーかディーラー
 	div.style.display = "inline-block";
 	o.appendChild(div);
 	
-	const img = document.createElement('img');
-	img.src = num + ".png";
+	let img = document.createElement('img');
+	img.src = "assets/img/" + num + ".png";
 	img.style.position = "absolute";
 	img.style.top = "0";
 	img.style.left = GetPixel(pName);
 	img.style.height = "100%";
 	img.style.width = "auto";
-	
+	img.style.maxWidth = "none";
 	div.appendChild(img);
+	
+		/*
+	div = document.createElement('div');
+	div.style.position = "relative";
+	div.style.overflow = "hidden";
+	div.style.width = "60px";
+	div.style.height = "90px";
+	div.style.display = "inline-block";
+	div.appendChild(img);
+
+	document.getElementById('card-history').appendChild(div);
+	img = document.createElement('img');
+	img.src = "assets/img/" + num + ".png";
+	img.style.position = "absolute";
+	img.style.top = "0";
+	img.style.left = GetPixel(pName);
+	img.style.height = "100%";
+	img.style.width = "auto";
+	img.style.maxWidth = "none";
+	div.appendChild(img);
+	*/
 }
 
 /**

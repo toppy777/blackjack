@@ -1,33 +1,39 @@
 ﻿<html lang="ja">
 <head>
 <title>BlackJack</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="assets/css/foundation.css">
+<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 </head>
 <body>
 
 <div id="main">
-	<h1>BlackJack</h1>
-	<div>ディーラー<span id="dsum"></span></div>
-	<button id="start">ゲームスタート</button>
-	<div id="d_imgs"></div>
+	<div class="grid-x">
+		<h1 class="cell">BlackJack</h1>
+	</div>
 
-	<div id="d"></div>
+	<div class="grid-x">
+		<div class="cell small-6">
+			<div>ディーラー<span id="dsum"></span></div>
+			<button id="start" type="button" class="success button">ゲームスタート</button>
+			<div id="d_imgs"></div>
+			<div id="d"></div>
+		</div>
+		<div class="cell small-6">
+			<div>プレイヤー<span id="psum"></span></div>
+			<button id="draw" class="primary button">ヒット</button>
+			<button id="duel" class="primary button">スタンド</button>
+			<div id="p_imgs"></div>
+			<div id="p"></div>
+		</div>
+	</div>
 
-	<br>
-
-	<div>プレイヤー<span id="psum"></span></div>
-	<button id="draw">ヒット</button><button id="duel">スタンド</button>
-	<div id="p_imgs"></div>
-	<div id="p"></div>
-
-	<br>
-
-
-	<div id="duelresult"></div>
-	<br><br>
-
-	<div id="gold"></div>
+	<div class="grid-x">
+		<h2 id="duelresult" class="cell"></h2>
+	</div>
+	
 </div>
+<div id="gold"></div>
+<!--
 <div id="discription">
 	◆ブラックジャックのルール<br>
 	ブラックジャックは引いたカードの合計を21に近づけていくゲームです。<br>
@@ -36,7 +42,8 @@
 	最初の2枚で21になると、ブラックジャックとなります。
 	
 </div>
-<script type="text/javascript" src="scripts.js"></script>
+-->
+<script type="text/javascript" src="assets/js/scripts.js"></script>
 </body>
 </html>
 <!--
